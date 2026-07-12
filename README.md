@@ -1,59 +1,66 @@
-# Java 2D Adventure Game
+# Java 2D 冒险游戏
 
-基于 Java Swing/AWT 开发的 2D 冒险类课程项目，支持角色移动、地图渲染、物品交互和基础碰撞检测。
+这是上课时做的一个 Java 2D 小游戏练习，主要用来熟悉 Java 图形界面、键盘监听、图片加载、地图绘制和简单碰撞检测。
 
-## 技术栈
+项目用 `JFrame` 和 `JPanel` 显示游戏窗口，角色可以通过 `W A S D` 移动。地图是用文本文件保存的瓦片编号，再根据编号加载草地、墙、水、树等图片。游戏里还放了钥匙、门、宝箱、靴子等物品，用来练习角色和物品之间的交互。
 
-- Java
-- Java Swing / AWT
-- 面向对象编程
-- 键盘事件监听
-- 图片资源加载
-- 瓦片地图渲染
-- 基础碰撞检测
+## 主要内容
 
-## 功能
+- Java Swing/AWT 窗口和画布
+- 游戏循环和画面刷新
+- 键盘按键控制角色移动
+- 角色行走图片切换
+- 瓦片地图加载和绘制
+- 地图障碍物碰撞检测
+- 钥匙、门、宝箱、靴子等物品交互
 
-- 使用 `JFrame` 和 `JPanel` 构建游戏窗口与画布。
-- 使用游戏循环控制画面刷新和角色状态更新。
-- 支持 `W`、`A`、`S`、`D` 控制角色上下左右移动。
-- 根据角色方向切换行走动画图片。
-- 使用瓦片地图加载草地、墙体、水面、树木、沙地等场景元素。
-- 支持角色与墙体、水面、树木等障碍物的碰撞检测。
-- 支持钥匙、门、宝箱、靴子等物品交互。
-- 收集靴子后提升角色移动速度。
-
-## 目录结构
+## 目录
 
 ```text
 src/
-  Main/        游戏入口、面板、按键监听、碰撞检测、资源设置
-  Entity/      角色实体与玩家逻辑
-  Tile/        瓦片地图与地图加载
-  Objects/     钥匙、门、宝箱、靴子等物品
+  Main/      程序入口、游戏面板、按键监听、碰撞检测
+  Entity/    角色相关代码
+  Tile/      地图瓦片和地图加载
+  Objects/   游戏物品
+
 Res/
-  Maps/        地图文本文件
-  Tiles/       地图瓦片图片资源
-  player/      玩家角色图片资源
-  objects/     物品图片资源
+  Maps/      地图文本
+  Tiles/     地图图片
+  player/    角色图片
+  Objects/   物品图片
 ```
 
 ## 运行方式
 
-运行环境：
+推荐用 IntelliJ IDEA 打开项目：
 
-- JDK 8 或更高版本
-- IntelliJ IDEA / Eclipse / VS Code 均可
+1. 把 `src` 设置为 Sources Root。
+2. 把 `Res` 设置为 Resources Root。
+3. 运行 `src/Main/Main.java`。
 
-使用 IntelliJ IDEA：
+也可以用命令行编译运行：
 
-1. 打开项目目录。
-2. 将 `src` 设置为 Sources Root。
-3. 将 `Res` 设置为 Resources Root。
-4. 运行 `src/Main/Main.java`。
+```bash
+mkdir build
+javac -encoding UTF-8 -d build $(find src -name "*.java")
+cp -r Res/Maps Res/Tiles Res/player Res/Objects build/
+java -cp build Main.Main
+```
 
-命令行运行需要先确保资源目录被加入 classpath。推荐使用 IDE 运行。
+Windows PowerShell 可以参考：
 
-## 项目收获
+```powershell
+New-Item -ItemType Directory -Path build
+$files = Get-ChildItem -Path src -Recurse -Filter *.java | ForEach-Object { $_.FullName }
+javac -encoding UTF-8 -d build $files
+Copy-Item Res\Maps build\Maps -Recurse
+Copy-Item Res\Tiles build\Tiles -Recurse
+Copy-Item Res\player build\player -Recurse
+New-Item -ItemType Directory -Path build\Objects
+Get-ChildItem Res\Objects | Copy-Item -Destination build\Objects -Recurse
+java -cp build Main.Main
+```
 
-通过该课程项目，练习了 Java 图形界面开发、面向对象编程、键盘事件处理、图片资源加载、瓦片地图渲染和基础碰撞检测等内容。
+## 练习收获
+
+这个项目主要是课程练习，不是完整商业游戏。通过它练习了 Java 面向对象、Swing 图形界面、键盘事件、资源加载、地图绘制和基础碰撞检测。

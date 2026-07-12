@@ -8,7 +8,7 @@ public class Obj_Boot extends SuperObject{
     public Obj_Boot() {
         name = "Boot";
         try {
-            image = ImageIO.read(getClass().getResourceAsStream("/objects/boots.png"));
+            image = ImageIO.read(getClass().getResourceAsStream("/Objects/boots.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
